@@ -18,7 +18,7 @@ app.set('view engine', 'ejs');
 
 // GET index.ejs
 app.get('/', (req, res)=>{
-  res.render('index');
+  res.render('index.html');
 });
 
 io.sockets.on('connection', (socket)=>{
