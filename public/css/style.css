@@ -1,0 +1,167 @@
+/* General styles */
+body{
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+.text-center{
+  text-align: center;
+}
+.text-left{
+  float: left;
+}
+.text-right{
+  float: right;
+}
+.btn{
+  margin: 0 1px;
+}
+.btn:focus{
+  outline: 0;
+}
+
+/* Elements */
+.search-header{
+  padding: 40px;
+}
+.search-header img{
+  height: 100px;
+}
+.username{
+  padding: 10px;
+  width: 250px;
+  outline: none;
+}
+.user-button{
+  padding: 10px;
+  outline: none;
+  background-color: #555;
+  color: #eee;
+  border-color: #555;
+}
+.user-button:hover{
+  background-color: #eee;
+  color: #000;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.search-content{
+  display: none;
+}
+.search-field{
+  padding: 12px;
+  margin-bottom: 10px;
+  width: 400px;
+  font-size: 1.1em;
+  outline: none;
+
+}
+.search-button{
+  padding: 12px;
+  background-color: #555;
+  color: #eee;
+  border-color: #555;
+  outline: none;
+  font-size: 1.1em;
+
+}
+.search-button:hover{
+  background-color: #eee;
+  color: #000;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+#userWrapper{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 12px;
+  width: 200px;
+  height: 100%;
+  background-color: #ccc;
+  color: #262626;
+  display: none;
+}
+#userWrapper h3{
+  text-transform: uppercase;
+}
+#cross{
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  height: 7px;
+  font-size: 22px;
+}
+#cross:hover{
+  color: #999;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+hr{
+  height: 3px;
+  background-color: #000;
+  border: none;
+  margin: 0;
+}
+.search-container{
+  display: none;
+}
+
+/* id element */
+/* #player{
+  display: none;
+} */
+#search{
+  display: none;
+}
+#users{
+  margin: 0;
+  padding: 7px 20px;
+  font-size: 1em;
+  background-color: #999;
+  border-radius: 30.5px;
+}
+#playerWrapper{
+  display: none;
+  text-align: center;
+}
+#playerControl{
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 640px;
+  padding: 3px;
+  border-radius: 4px;
+}
+#playerControl:after{
+  content: '';
+  display: table;
+  clear: both;
+}
+#progressBar{
+  float: left;
+  height: 38px;
+  width: 510px;
+  margin-left: 15px;
+  cursor: pointer;
+}
+#line{
+  position: relative;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 12%;
+  width: 100%;
+  background-color: #262626;
+
+}
+#indicator{
+  position: relative;
+  left: 0;
+  top: 50%;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  transform: translateY(-70%) scaleX(0.4) rotate(45deg);
+}
