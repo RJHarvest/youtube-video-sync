@@ -165,3 +165,9 @@ hr{
   background-color: #eee;
   transform: translateY(-70%) scaleX(0.4) rotate(45deg);
 }
+#openUser{
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  display: none;
+}

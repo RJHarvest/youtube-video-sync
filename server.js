@@ -16,13 +16,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-server.listen(process.env.PORT || 5000);
-console.log('server is running');
+// server.listen(process.env.PORT || 5000);
+// console.log('server is running');
 
 // GET index.ejs
 app.get('/', (req, res)=>{
-  res.sendFile(__dirname + '/index.html');
-  // res.render('index.ejs');
+  // res.sendFile(__dirname + '/index.html');
+  res.render('index');
 });
 
 io.sockets.on('connection', (socket)=>{
@@ -55,6 +55,11 @@ io.sockets.on('connection', (socket)=>{
     io.sockets.emit('event', msg);
   });
 
+  socket.on('new video', function(url){
+    console.log(url);
+    io.sockets.emit('load video', url);
+  });
+
   // Disconnect
   socket.on('disconnect', function(data){
     if(!socket.username){
@@ -67,6 +72,6 @@ io.sockets.on('connection', (socket)=>{
 });
 
 // Run server
-// server.listen(port, ()=>{
-//   console.log(`Server is running on port ${port}`);
-// });
+server.listen(port, ()=>{
+  console.log(`Server is running on port ${port}`);
+});

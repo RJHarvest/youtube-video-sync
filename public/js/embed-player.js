@@ -59,3 +59,8 @@ function pauseVideo(){
 function seekTo(seconds){
   player.seekTo(seconds);
 }
+
+function onVideoChange(videoId){
+  player.loadVideoById(videoId);
+  console.log(videoId);
+}

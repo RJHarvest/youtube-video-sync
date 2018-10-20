@@ -3,10 +3,10 @@
   <head>
     <title>Rj Projects | Video Sync</title>
     <link rel="stylesheet" href="./css/style.css">
-    <!-- <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"> -->
-    <!-- <link href="http://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/slate/bootstrap.min.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/bootstrap-glyphicons.css">
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/slate/bootstrap.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="./css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="./css/bootstrap-glyphicons.css"> -->
     <link rel="icon" href="/img/Russell-logo.png">
   </head>
   <body>
@@ -21,13 +21,17 @@
         </form>
       </div>
 
-      <!-- <div class="search-content" id="search">
-        <form class="" action="#">
-          <input class="search-field" type="text" name="search" placeholder="Search Youtube Videos Here...">
+      <div id="search">
+        <form id="searchForm">
+          <input class="search-field" id="searchUrl" type="text" name="search" placeholder="Enter Youtube URL Here...">
           <button class="search-button" type="submit" name="submit">Search</button>
         </form>
-      </div> -->
+      </div>
 
+      <!-- Button to toggle users connected to socket side bar -->
+      <div id="openUser">
+        <button class="btn btn-primary" id="btnOpenUser">Users</button>
+      </div>
     </div>
 
     <!-- Where the videos are going to appear -->
@@ -78,6 +82,7 @@
           console.log(seekTo);
 
           var time = player.getCurrentTime();
+          console.log(time);
           socket.emit('video event', time);
         });
         setInterval(function(){
@@ -86,16 +91,8 @@
           }
 
           var fraction = player.getCurrentTime()/player.getDuration()*100;
-          // console.log(fraction);
           $progressIndicator.css("left", fraction.toString() + "%");
         }, 200);
-
-        // socket.on('event', function(msg){
-        //   console.log(msg);
-        //   var seekTime = msg/player.getDuration()*100;
-        //   $progressIndicator.css('left', seekTime.toString() + '%');
-        //   seekTo(msg);
-        // });
       }
     </script>
 
@@ -105,6 +102,8 @@
         var $usernameForm = $('#usernameForm');
         var $users = $('#users');
         var $username = $('#username');
+        var $searchUrl = $('#searchUrl');
+        var $searchForm = $('#searchForm');
         var $error = $('#error');
 
         var $playBtn = $('#playVideo');
@@ -140,11 +139,11 @@
           socket.emit('new user', $username.val(), function(data){
             if(data){
               $('#usernameWrapper').hide();
-              // $('#search').show();
+              $('#search').show();
               $('#playerWrapper').show();
               $('#userWrapper').show();
-            }else if(!data){
-              $error.html('Please enter a username!');
+            // }else if(!data){
+            //   $error.html('Please enter a username!');
             }else{
               $error.html('Username is taken');
             }
@@ -160,8 +159,26 @@
           $users.html(html);
         });
 
+        // Search form submit function
+        $searchForm.submit(function(e){
+          e.preventDefault();
+          var url = $searchUrl.val();
+          socket.emit('new video', url);
+          // onVideoChange(url);
+        });
+
+        socket.on('load video', function(url){
+          onVideoChange(url);
+        });
+
         // Function to close the sidebar
         $('#cross').click(function(){
+          $('#userWrapper').slideToggle();
+          $('#openUser').show();
+        });
+
+        $('#btnOpenUser').click(function(){
+          $('#openUser').hide();
           $('#userWrapper').slideToggle();
         });
 
