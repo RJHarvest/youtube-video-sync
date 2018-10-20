@@ -17,10 +17,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 server.listen(process.env.PORT || 5000);
+console.log('server is running');
 
 // GET index.ejs
 app.get('/', (req, res)=>{
   res.sendFile(__dirname + '/index.html');
+  // res.render('index.ejs');
 });
 
 io.sockets.on('connection', (socket)=>{
