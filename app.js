@@ -16,6 +16,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+server.listen(process.env.PORT || 5000);
+
 // GET index.ejs
 app.get('/', (req, res)=>{
   res.sendFile(__dirname + '/index.html');
@@ -63,6 +65,6 @@ io.sockets.on('connection', (socket)=>{
 });
 
 // Run server
-server.listen(port, ()=>{
-  console.log(`Server is running on port ${port}`);
-});
+// server.listen(port, ()=>{
+//   console.log(`Server is running on port ${port}`);
+// });
