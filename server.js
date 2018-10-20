@@ -51,12 +51,10 @@ io.sockets.on('connection', (socket)=>{
 
   // Video events (play and pause video)
   socket.on('video event', function(msg){
-    console.log(msg);
     io.sockets.emit('event', msg);
   });
 
   socket.on('new video', function(url){
-    console.log(url);
     io.sockets.emit('load video', url);
   });
 

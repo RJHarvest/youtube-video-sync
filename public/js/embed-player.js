@@ -62,5 +62,4 @@ function seekTo(seconds){
 
 function onVideoChange(videoId){
   player.loadVideoById(videoId);
-  console.log(videoId);
 }
