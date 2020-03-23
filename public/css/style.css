@@ -184,6 +184,7 @@ hr{
   height: 370px;
   padding: 5px 10px;
   color: #000;
+  overflow-y: scroll;
 }
 #message{
   margin-left: 17px;
