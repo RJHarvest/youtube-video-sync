@@ -2,12 +2,12 @@ const express = require('express');
 const ejs = require('ejs');
 const path = require('path');
 
-var app = express();
-var server = require('http').createServer(app);
-var io = require('socket.io').listen(server);
+const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io').listen(server);
 const port = process.env.PORT || 5000;
 
-var usernames = [];
+const usernames = [];
 
 // For static files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -55,7 +55,8 @@ io.sockets.on('connection', (socket)=>{
   });
 
   socket.on('new video', function(url){
-    io.sockets.emit('load video', url);
+    const videoId = url.split('=')[1]
+    io.sockets.emit('load video', videoId);
   });
 
   // Disconnect
