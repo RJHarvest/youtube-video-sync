@@ -8,6 +8,7 @@ const io = require('socket.io').listen(server);
 const port = process.env.PORT || 5000;
 
 const usernames = [];
+let currentVideoId = 'L9ro1KjkJMg';
 
 // For static files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -29,14 +30,13 @@ io.sockets.on('connection', (socket)=>{
   console.log('Socket connected...');
 
   socket.on('new user', function(data, callback){
-    if(usernames.indexOf(data) != -1){
-      callback(false);
-    }else{
-      callback(true);
-      socket.username = data;
-      usernames.push(socket.username);
-      updateUsernames();
+    if (usernames.indexOf(data) != -1) {
+      return callback(false);
     }
+    callback(currentVideoId);
+    socket.username = data;
+    usernames.push(socket.username);
+    updateUsernames();
   });
 
   // Update usernames
@@ -55,8 +55,8 @@ io.sockets.on('connection', (socket)=>{
   });
 
   socket.on('new video', function(url){
-    const videoId = url.split('=')[1]
-    io.sockets.emit('load video', videoId);
+    currentVideoId = url.split('=')[1]
+    io.sockets.emit('load video', currentVideoId);
   });
 
   // Disconnect

@@ -154,13 +154,14 @@
         // On username form submit
         $usernameForm.submit(function(e){
           e.preventDefault();
-          socket.emit('new user', $username.val(), function(data){
-            if(data){
+          socket.emit('new user', $username.val(), function(currentVideoUrl){
+            if(currentVideoUrl){
               $('#usernameWrapper').hide();
               $('#search').show();
               $('#playerWrapper').show();
               $('#userWrapper').show();
               $('#chatWrapper').show();
+              onVideoChange(currentVideoUrl);
             // }else if(!data){
             //   $error.html('Please enter a username!');
             }else{
